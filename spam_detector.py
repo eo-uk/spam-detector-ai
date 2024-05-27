@@ -5,8 +5,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 
-from data import NEW_DATA, TRAINING_DATA, TRAINING_LABELS
-
 
 class SpamDetector:
 
@@ -36,20 +34,3 @@ class SpamDetector:
     def load(self, path="model.pkl"):
         with open(path, 'rb') as file:
             self.model = pickle.load(file)
-
-def main():
-    if __name__ == "__main__":
-        detector = SpamDetector()
-        detector.train(TRAINING_DATA, TRAINING_LABELS)
-        
-        for index, email in enumerate(NEW_DATA):
-            print(
-                f"New email {index + 1}:" "\n"
-                f"{email}" "\n"
-                f"Result: {'is spam' if detector.is_spam(email) else 'not spam'}" "\n"
-                "\n\n---\n\n"
-            )
-
-        input("Press Enter to exit")
-
-main()
